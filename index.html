@@ -664,42 +664,217 @@
 
   /* ── VEILLE ── */
   #veille { background: rgba(13, 21, 32, 0.4); }
-  .veille-grid {
+  .veille-p { font-size: 13px; color: var(--text2); line-height: 1.8; }
+
+  /* Veille header thematique */
+  .veille-intro {
+    background: var(--card-bg);
+    border: 1px solid rgba(0, 200, 255, 0.15);
+    border-left: 3px solid var(--cyan);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem 2rem;
+    margin-bottom: 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: center;
+  }
+  .veille-intro-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--cyan);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .veille-intro-question {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--text);
+    font-style: italic;
+  }
+  .veille-intro-badge {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-end;
+  }
+  .veille-badge-item {
+    background: rgba(0, 200, 255, 0.06);
+    border: 1px solid rgba(0, 200, 255, 0.12);
+    border-radius: 4px;
+    padding: 4px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--cyan);
+    white-space: nowrap;
+  }
+
+  /* Themes tabs */
+  .veille-themes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .veille-theme-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s;
+    color: var(--text2);
+  }
+  .veille-theme-btn:hover { border-color: var(--border2); }
+  .veille-theme-btn.vt-active {
+    background: rgba(0, 200, 255, 0.06);
+    border-color: rgba(0, 200, 255, 0.25);
+    color: var(--text);
+  }
+  .vtb-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text3);
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+  .vtb-num.vt-active { color: var(--cyan); }
+  .vtb-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  /* Theme panels */
+  .veille-panel { display: none; }
+  .veille-panel.vp-active { display: block; }
+
+  /* Content cards inside panels */
+  .veille-content-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
   }
   .veille-card {
     background: var(--card-bg);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
-    padding: 1.75rem;
+    padding: 1.5rem;
+    transition: border-color 0.2s;
   }
+  .veille-card:hover { border-color: var(--border2); }
+  .veille-card.full { grid-column: 1 / -1; }
   .veille-card-title {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     font-weight: 600;
     color: var(--cyan);
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     display: flex;
     align-items: center;
     gap: 8px;
   }
-  .veille-card-title span { font-size: 20px; }
-  .veille-p { font-size: 13px; color: var(--text2); line-height: 1.8; }
+  .veille-card-title span { font-size: 18px; }
 
-  .tool-list { list-style: none; margin-top: 1rem; }
+  /* Impact table */
+  .impact-table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 12px; }
+  .impact-table th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border2);
+    text-align: left;
+  }
+  .impact-table th:first-child { color: var(--green); }
+  .impact-table th:last-child { color: rgba(255, 100, 100, 0.8); }
+  .impact-table td { padding: 7px 12px; border-bottom: 1px solid var(--border); font-size: 12px; color: var(--text2); vertical-align: top; }
+  .impact-table tr:last-child td { border-bottom: none; }
+  .impact-table .plus { color: var(--green); font-weight: 600; }
+  .impact-table .minus { color: rgba(255, 120, 120, 0.9); font-weight: 600; }
+
+  /* Usage list */
+  .usage-list { list-style: none; margin-top: 0.5rem; }
+  .usage-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 7px 0;
+    font-size: 12.5px;
+    color: var(--text2);
+    border-bottom: 1px solid var(--border);
+    line-height: 1.5;
+  }
+  .usage-list li:last-child { border-bottom: none; }
+  .usage-icon {
+    width: 24px; height: 24px;
+    border-radius: 4px;
+    background: rgba(0, 200, 255, 0.07);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* Strat list */
+  .strat-list { list-style: none; margin-top: 0.5rem; }
+  .strat-list li {
+    padding: 8px 0 8px 20px;
+    font-size: 12.5px;
+    color: var(--text2);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    line-height: 1.6;
+  }
+  .strat-list li:last-child { border-bottom: none; }
+  .strat-list li::before { content: '›'; position: absolute; left: 4px; color: var(--cyan); font-weight: 700; }
+
+  /* Tool list */
+  .tool-list { list-style: none; margin-top: 0.5rem; }
   .tool-list li {
     display: flex;
     align-items: center;
     gap: 8px;
     padding: 6px 0;
-    font-size: 13px;
+    font-size: 12.5px;
     color: var(--text2);
     border-bottom: 1px solid var(--border);
   }
   .tool-list li:last-child { border-bottom: none; }
-  .tool-list .icon { color: var(--cyan); font-size: 14px; }
+  .tool-list .icon { color: var(--cyan); font-size: 13px; }
+
+  /* Articles / sources */
+  .article-links { display: flex; flex-direction: column; gap: 10px; margin-top: 0.5rem; }
+  .article-link {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    text-decoration: none;
+    transition: all 0.2s;
+    color: var(--text);
+  }
+  .article-link:hover { border-color: var(--border2); transform: translateX(3px); }
+  .article-link-icon {
+    width: 28px; height: 28px;
+    border-radius: 5px;
+    background: rgba(0, 200, 255, 0.08);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .article-link-title { font-size: 12.5px; color: var(--text); line-height: 1.4; margin-bottom: 2px; }
+  .article-link-src { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text3); }
 
   /* ── CONTACT ── */
   .contact-grid {
@@ -815,9 +990,12 @@
 
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
-    .hero-grid, .about-grid, .veille-grid, .contact-grid {
+    .hero-grid, .about-grid, .veille-content-grid, .contact-grid {
       grid-template-columns: 1fr;
     }
+    .veille-themes { grid-template-columns: 1fr; }
+    .veille-intro { grid-template-columns: 1fr; }
+    .veille-intro-badge { align-items: flex-start; flex-direction: row; flex-wrap: wrap; }
     .section-title { font-size: 2rem; }
     .hero-name { font-size: 2.8rem; }
     .nav-links { display: none; }
@@ -1351,50 +1529,313 @@
       <h2 class="section-title">Intelligence <span class="accent">Artificielle</span></h2>
       <div class="section-line"></div>
     </div>
-    <div class="veille-grid">
 
-      <div class="veille-card fade-in">
-        <div class="veille-card-title"><span>🤖</span> Définition</div>
-        <p class="veille-p">
-          L'Intelligence Artificielle désigne la capacité des systèmes informatiques à simuler des processus cognitifs humains :
-          apprentissage, raisonnement, résolution de problèmes et compréhension du langage naturel.
-          Elle repose sur des algorithmes de machine learning et de deep learning entraînés sur de grandes quantités de données.
+    <!-- Intro / thématique -->
+    <div class="veille-intro fade-in">
+      <div>
+        <div class="veille-intro-title">// Thématique de veille</div>
+        <div class="veille-intro-question">«&nbsp;L'intelligence artificielle : outil d'avenir ou menace pour l'autonomie humaine ?&nbsp;»</div>
+        <p style="font-size: 13px; color: var(--text2); margin-top: 10px; line-height: 1.7;">
+          La veille technologique consiste à surveiller les évolutions techniques et innovations d'un secteur afin d'anticiper les changements.
+          J'effectue ma veille via des <strong style="color: var(--text)">flux RSS</strong> et des <strong style="color: var(--text)">Google Alertes</strong> sur les mots-clés : IA, cybersécurité, GLPI, sysadmin.
         </p>
       </div>
-
-      <div class="veille-card fade-in">
-        <div class="veille-card-title"><span>💡</span> Usages quotidiens</div>
-        <p class="veille-p">
-          L'IA s'intègre désormais dans de nombreux domaines professionnels et personnels :
-          assistants vocaux, systèmes de recommandation, détection de fraudes bancaires,
-          génération de code, analyse de logs système, outils de cybersécurité automatisés (EDR, SIEM).
-          Dans l'IT, elle révolutionne la supervision des infrastructures et l'analyse des incidents.
-        </p>
+      <div class="veille-intro-badge">
+        <span class="veille-badge-item">📡 Flux RSS actifs</span>
+        <span class="veille-badge-item">🔔 Google Alertes</span>
+        <span class="veille-badge-item">📄 ANSSI / CERT-FR</span>
       </div>
-
-      <div class="veille-card fade-in">
-        <div class="veille-card-title"><span>🧠</span> Impact cognitif</div>
-        <p class="veille-p">
-          L'IA modifie nos habitudes de travail et de réflexion. Elle peut amplifier les capacités humaines
-          mais soulève des questions sur la dépendance cognitive, la créativité, et la vérification
-          de l'information. Pour les techniciens IT, elle devient un outil d'aide à la décision,
-          tout en exigeant un esprit critique renforcé face aux résultats générés.
-        </p>
-      </div>
-
-      <div class="veille-card fade-in">
-        <div class="veille-card-title"><span>📡</span> Outils de veille utilisés</div>
-        <ul class="tool-list">
-          <li><span class="icon">📰</span> Flux RSS (Feedly, Inoreader) – actualités tech et sécu</li>
-          <li><span class="icon">🔔</span> Google Alertes – mots-clés IA, GLPI, cybersécurité</li>
-          <li><span class="icon">💬</span> Reddit (r/sysadmin, r/netsec, r/artificial)</li>
-          <li><span class="icon">🔗</span> LinkedIn – actualités professionnelles IT</li>
-          <li><span class="icon">📄</span> ANSSI, CERT-FR – bulletins de sécurité</li>
-          <li><span class="icon">📺</span> YouTube – chaînes tech et tutoriels</li>
-        </ul>
-      </div>
-
     </div>
+
+    <!-- Navigation par thèmes -->
+    <div class="veille-themes fade-in">
+      <button class="veille-theme-btn vt-active" onclick="switchVeille(0, this)">
+        <div class="vtb-num vt-active">THÈME 01</div>
+        <div class="vtb-title">Qu'est-ce que l'IA ?</div>
+      </button>
+      <button class="veille-theme-btn" onclick="switchVeille(1, this)">
+        <div class="vtb-num">THÈME 02</div>
+        <div class="vtb-title">L'IA au quotidien</div>
+      </button>
+      <button class="veille-theme-btn" onclick="switchVeille(2, this)">
+        <div class="vtb-num">THÈME 03</div>
+        <div class="vtb-title">Impact sur nos capacités</div>
+      </button>
+    </div>
+
+    <!-- PANEL 1 : Définition -->
+    <div class="veille-panel vp-active" id="vpanel-0">
+      <div class="veille-content-grid">
+
+        <div class="veille-card fade-in">
+          <div class="veille-card-title"><span>🤖</span> Définition générale</div>
+          <p class="veille-p">
+            L'intelligence artificielle (IA) désigne l'ensemble des techniques permettant à des machines de reproduire des fonctions
+            habituellement associées à l'intelligence humaine : raisonnement, planification, apprentissage, créativité, résolution
+            de problèmes, perception et prise de décision.
+          </p>
+          <p class="veille-p" style="margin-top: 10px;">
+            <strong style="color: var(--text)">Source CNIL :</strong> elle inclut l'apprentissage automatique (machine learning),
+            les approches fondées sur la logique et les connaissances, ainsi que les méthodes statistiques bayésiennes.
+          </p>
+        </div>
+
+        <div class="veille-card fade-in">
+          <div class="veille-card-title"><span>🇪🇺</span> Définition institutionnelle</div>
+          <p class="veille-p">
+            Le Parlement européen définit l'IA comme <em style="color: var(--text)">"tout outil utilisé par une machine afin de reproduire
+            des comportements liés aux humains, tels que le raisonnement, la planification et la créativité"</em>.
+          </p>
+          <p class="veille-p" style="margin-top: 10px;">
+            La Commission européenne distingue trois grandes approches : apprentissage automatique, logique &amp; connaissances,
+            et méthodes statistiques. L'AI Act européen vise à encadrer ces usages selon leur niveau de risque.
+          </p>
+        </div>
+
+        <div class="veille-card fade-in">
+          <div class="veille-card-title"><span>⚙️</span> Les grands types d'IA</div>
+          <ul class="usage-list">
+            <li><div class="usage-icon">🧮</div><div><strong style="color: var(--text)">IA symbolique</strong> — fondée sur des règles logiques et des bases de connaissances explicites</div></li>
+            <li><div class="usage-icon">📊</div><div><strong style="color: var(--text)">Machine Learning</strong> — algorithmes qui apprennent à partir de données (classification, régression)</div></li>
+            <li><div class="usage-icon">🧠</div><div><strong style="color: var(--text)">Deep Learning</strong> — réseaux de neurones profonds, à la base des LLM (GPT, Claude, Gemini)</div></li>
+            <li><div class="usage-icon">🗣️</div><div><strong style="color: var(--text)">NLP</strong> — traitement du langage naturel, reconnaissance vocale, traduction automatique</div></li>
+            <li><div class="usage-icon">👁️</div><div><strong style="color: var(--text)">Vision par ordinateur</strong> — détection d'objets, reconnaissance faciale, imagerie médicale</div></li>
+          </ul>
+        </div>
+
+        <div class="veille-card fade-in">
+          <div class="veille-card-title"><span>🔐</span> IA & Cybersécurité</div>
+          <p class="veille-p" style="margin-bottom: 10px;">
+            L'IA est désormais au cœur des outils de sécurité informatique. Les EDR (Endpoint Detection & Response)
+            comme SentinelOne utilisent du machine learning pour détecter les comportements anormaux en temps réel.
+          </p>
+          <ul class="strat-list">
+            <li>Analyse comportementale des menaces (UEBA)</li>
+            <li>Corrélation automatique d'événements (SIEM/SOAR)</li>
+            <li>Détection d'anomalies réseau par IA</li>
+            <li>Génération automatique de rapports d'incidents</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Sources thème 1 -->
+      <div class="veille-card fade-in">
+        <div class="veille-card-title"><span>📰</span> Articles & sources – Thème 1</div>
+        <div class="article-links">
+          <a href="https://www.cnil.fr/fr/definition/intelligence-artificielle" target="_blank" class="article-link">
+            <div class="article-link-icon">🔗</div>
+            <div>
+              <div class="article-link-title">Définition de l'IA – CNIL</div>
+              <div class="article-link-src">cnil.fr → Glossaire IA</div>
+            </div>
+          </a>
+          <a href="https://www.europarl.europa.eu/topics/fr/article/20200827STO85804/qu-est-ce-que-l-intelligence-artificielle-et-comment-est-elle-utilisee" target="_blank" class="article-link">
+            <div class="article-link-icon">🇪🇺</div>
+            <div>
+              <div class="article-link-title">Qu'est-ce que l'IA ? – Parlement Européen</div>
+              <div class="article-link-src">europarl.europa.eu → Dossier IA</div>
+            </div>
+          </a>
+          <a href="https://www.polytechnique-insights.com/tribunes/science/intelligence-artificielle-et-humaine-sont-elles-comparables/" target="_blank" class="article-link">
+            <div class="article-link-icon">🎓</div>
+            <div>
+              <div class="article-link-title">Intelligence artificielle et humaine sont-elles comparables ?</div>
+              <div class="article-link-src">polytechnique-insights.com</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL 2 : Usages quotidiens -->
+    <div class="veille-panel" id="vpanel-1">
+      <div class="veille-content-grid">
+
+        <div class="veille-card fade-in">
+          <div class="veille-card-title"><span>🏠</span> Vie personnelle</div>
+          <ul class="usage-list">
+            <li><div class="usage-icon">🎙️</div><div><strong style="color: var(--text)">Assistants vocaux</strong> — Siri, Alexa, Google Assistant : météo, rappels, domotique</div></li>
+            <li><div class="usage-icon">🎬</div><div><strong style="color: var(--text)">Recommandations</strong> — Netflix, Spotify, YouTube adaptent le contenu à nos habitudes</div></li>
+            <li><div class="usage-icon">🗺️</div><div><strong style="color: var(--text)">Navigation</strong> — Google Maps prédit le trafic et optimise les itinéraires en temps réel</div></li>
+            <li><div class="usage-icon">💬</div><div><strong style="color: var(--text)">Traduction</strong> — DeepL et Google Translate permettent une communication multilingue instantanée</div></li>
+            <li><div class="usage-icon">🏥</div><div><strong style="color: var(--text)">Santé</strong> — détection précoce de maladies, analyse d'imagerie médicale, montres connectées</div></li>
+          </ul>
+        </div>
+
+        <div class="veille-card fade-in">
+          <div class="veille-card-title"><span>💼</span> Vie professionnelle</div>
+          <ul class="usage-list">
+            <li><div class="usage-icon">📧</div><div><strong style="color: var(--text)">Gestion des emails</strong> — filtrage spam, réponses suggérées, classification automatique</div></li>
+            <li><div class="usage-icon">🏦</div><div><strong style="color: var(--text)">Banque & fraude</strong> — détection d'opérations frauduleuses par analyse comportementale</div></li>
+            <li><div class="usage-icon">💻</div><div><strong style="color: var(--text)">Génération de code</strong> — GitHub Copilot, Claude, ChatGPT assistent les développeurs</div></li>
+            <li><div class="usage-icon">📱</div><div><strong style="color: var(--text)">Réseaux sociaux</strong> — modération automatique des contenus, algorithmes de fil d'actualité</div></li>
+            <li><div class="usage-icon">📚</div><div><strong style="color: var(--text)">Formation</strong> — plateformes adaptatives, tutorat IA, correction automatisée</div></li>
+          </ul>
+        </div>
+
+        <div class="veille-card full fade-in">
+          <div class="veille-card-title"><span>🖥️</span> IA dans le métier d'administrateur systèmes & réseaux</div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; margin-top: 0.5rem;">
+            <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px;">
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--cyan); margin-bottom: 4px;">SUPERVISION</div>
+              <div style="font-size: 12px; color: var(--text2);">Détection d'anomalies réseau, alertes prédictives avant panne, surveillance des logs système (SIEM alimenté par ML)</div>
+            </div>
+            <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px;">
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--cyan); margin-bottom: 4px;">SÉCURITÉ</div>
+              <div style="font-size: 12px; color: var(--text2);">EDR (SentinelOne), analyse comportementale des endpoints, détection de ransomwares, corrélation d'incidents</div>
+            </div>
+            <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px;">
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--cyan); margin-bottom: 4px;">AUTOMATISATION</div>
+              <div style="font-size: 12px; color: var(--text2);">Scripts PowerShell générés par IA, GLPI assisté, déploiement intelligent de patchs, gestion proactive des tickets</div>
+            </div>
+            <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px;">
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--cyan); margin-bottom: 4px;">MESSAGERIE</div>
+              <div style="font-size: 12px; color: var(--text2);">Filtrage antispam intelligent (Vade Cloud), détection de phishing, analyse des pièces jointes suspectes</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sources thème 2 -->
+      <div class="veille-card fade-in">
+        <div class="veille-card-title"><span>📰</span> Articles & sources – Thème 2</div>
+        <div class="article-links">
+          <a href="https://scopeo.ai/fr/blog/ia-quotidien/" target="_blank" class="article-link">
+            <div class="article-link-icon">🔗</div>
+            <div>
+              <div class="article-link-title">L'IA dans notre quotidien : usages concrets</div>
+              <div class="article-link-src">scopeo.ai</div>
+            </div>
+          </a>
+          <a href="https://www.polytechnique-insights.com/tribunes/science/intelligence-artificielle-et-humaine-sont-elles-comparables/" target="_blank" class="article-link">
+            <div class="article-link-icon">🎓</div>
+            <div>
+              <div class="article-link-title">Intelligence artificielle et humaine sont-elles comparables ?</div>
+              <div class="article-link-src">polytechnique-insights.com</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL 3 : Impact cognitif -->
+    <div class="veille-panel" id="vpanel-2">
+      <div class="veille-content-grid">
+
+        <div class="veille-card fade-in">
+          <div class="veille-card-title"><span>⚠️</span> Atrophie cognitive</div>
+          <p class="veille-p" style="margin-bottom: 10px;">
+            La délégation systématique de tâches intellectuelles à l'IA entraîne une réduction de l'engagement cognitif,
+            particulièrement pour la résolution de problèmes complexes.
+          </p>
+          <p class="veille-p">
+            Des études montrent une corrélation entre l'usage intensif d'outils comme ChatGPT et l'affaiblissement
+            des réseaux neuronaux liés à la mémoire et au raisonnement — un phénomène de <strong style="color: var(--text)">"décrochage cognitif"</strong>.
+          </p>
+        </div>
+
+        <div class="veille-card fade-in">
+          <div class="veille-card-title"><span>🔄</span> Compétences altérées</div>
+          <ul class="strat-list">
+            <li>Réduction de la pensée critique et de la créativité autonome</li>
+            <li>Affaiblissement de la mémoire à long terme (externalisation numérique)</li>
+            <li>Dépendance à la validation de l'IA pour les décisions professionnelles</li>
+            <li>Perte des compétences rédactionnelles et de synthèse</li>
+            <li>Diminution de la tolérance à la frustration face aux tâches complexes</li>
+            <li>Appauvrissement de la gestion des situations "hors-norme"</li>
+          </ul>
+        </div>
+
+        <div class="veille-card full fade-in">
+          <div class="veille-card-title"><span>⚖️</span> Le paradoxe de l'efficacité — avantages vs coûts cachés</div>
+          <table class="impact-table">
+            <thead>
+              <tr>
+                <th>Avantages perçus à court terme</th>
+                <th>Coûts cognitifs à long terme</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="plus">+</span> Gain de temps (jusqu'à 60% de rapidité)</td>
+                <td><span class="minus">−</span> Perte de compétences techniques sur la durée</td>
+              </tr>
+              <tr>
+                <td><span class="plus">+</span> Automatisation des tâches répétitives</td>
+                <td><span class="minus">−</span> Appauvrissement de la capacité à gérer les exceptions</td>
+              </tr>
+              <tr>
+                <td><span class="plus">+</span> Assistance à la prise de décision</td>
+                <td><span class="minus">−</span> Atrophie des zones cérébrales dédiées au jugement</td>
+              </tr>
+              <tr>
+                <td><span class="plus">+</span> Accès rapide à l'information synthétisée</td>
+                <td><span class="minus">−</span> Réduction de l'approfondissement et de l'esprit critique</td>
+              </tr>
+              <tr>
+                <td><span class="plus">+</span> Qualité apparente améliorée des productions</td>
+                <td><span class="minus">−</span> Dépendance et perte d'autonomie intellectuelle</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="veille-card fade-in">
+          <div class="veille-card-title"><span>🛡️</span> Stratégies de préservation cognitive</div>
+          <ul class="strat-list">
+            <li>Maintenir des "zones sans IA" pour la réflexion stratégique et créative</li>
+            <li>Adopter une approche critique systématique des outputs IA (vérifications croisées)</li>
+            <li>Privilégier les pédagogies actives sans médiation technologique</li>
+            <li>Conserver la rédaction manuelle pour les tâches d'apprentissage importantes</li>
+            <li>Utiliser l'IA comme outil de vérification, pas de substitution</li>
+          </ul>
+        </div>
+
+        <div class="veille-card fade-in">
+          <div class="veille-card-title"><span>📡</span> Mes outils de veille</div>
+          <ul class="tool-list">
+            <li><span class="icon">📰</span> Flux RSS (Feedly) – actualités tech et cybersécurité</li>
+            <li><span class="icon">🔔</span> Google Alertes – IA, GLPI, sysadmin, cybersécurité</li>
+            <li><span class="icon">💬</span> Reddit (r/sysadmin, r/netsec, r/artificial)</li>
+            <li><span class="icon">🔗</span> LinkedIn – actualités professionnelles IT</li>
+            <li><span class="icon">📄</span> ANSSI & CERT-FR – bulletins de sécurité officiels</li>
+            <li><span class="icon">📺</span> YouTube – chaînes tech, conférences SSTIC</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Sources thème 3 -->
+      <div class="veille-card fade-in">
+        <div class="veille-card-title"><span>📰</span> Articles & sources – Thème 3</div>
+        <div class="article-links">
+          <a href="https://iana-data.org/ethique-et-societe/843-lutilisation-exageree-doutils-dia-altere-les-capacites-cognitives-humaines.html" target="_blank" class="article-link">
+            <div class="article-link-icon">🧠</div>
+            <div>
+              <div class="article-link-title">L'utilisation exagérée d'outils d'IA altère les capacités cognitives humaines</div>
+              <div class="article-link-src">iana-data.org</div>
+            </div>
+          </a>
+          <a href="https://www.mentaleco.fr/performance-cognitive/ia-cerveau/" target="_blank" class="article-link">
+            <div class="article-link-icon">🔬</div>
+            <div>
+              <div class="article-link-title">IA & cerveau humain — performance cognitive et impacts</div>
+              <div class="article-link-src">mentaleco.fr</div>
+            </div>
+          </a>
+          <a href="https://www.polytechnique-insights.com/tribunes/science/intelligence-artificielle-et-humaine-sont-elles-comparables/" target="_blank" class="article-link">
+            <div class="article-link-icon">🎓</div>
+            <div>
+              <div class="article-link-title">Intelligence artificielle et humaine sont-elles comparables ?</div>
+              <div class="article-link-src">polytechnique-insights.com</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -1523,6 +1964,18 @@ termLines.forEach(l => {
     termBody.scrollTop = termBody.scrollHeight;
   }, l.delay);
 });
+
+// ── VEILLE TABS ──
+function switchVeille(index, btn) {
+  document.querySelectorAll('.veille-theme-btn').forEach((b, i) => {
+    b.classList.remove('vt-active');
+    b.querySelector('.vtb-num').classList.remove('vt-active');
+  });
+  document.querySelectorAll('.veille-panel').forEach(p => p.classList.remove('vp-active'));
+  btn.classList.add('vt-active');
+  btn.querySelector('.vtb-num').classList.add('vt-active');
+  document.getElementById('vpanel-' + index).classList.add('vp-active');
+}
 
 // ── TABS ──
 function switchTab(tab) {
