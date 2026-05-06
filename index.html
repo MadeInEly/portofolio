@@ -567,6 +567,29 @@
   }
   .skill-chip:hover { border-color: var(--border2); color: var(--text); }
   .skill-chip span { font-size: 14px; }
+  .skill-chip-clickable { cursor: pointer; justify-content: space-between; }
+  .skill-chip-clickable:hover { border-color: var(--cyan); color: var(--cyan); }
+  .chip-arrow { color: var(--cyan); font-weight: 700; margin-left: auto; opacity: 0; transition: opacity 0.15s; }
+  .skill-chip-clickable:hover .chip-arrow { opacity: 1; }
+
+  /* Modal body items */
+  .modal-task {
+    display: flex;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.6;
+  }
+  .modal-task:last-child { border-bottom: none; }
+  .modal-task-bullet {
+    color: var(--cyan);
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.4;
+    flex-shrink: 0;
+  }
 
   /* ── PROJECTS ── */
   .projects-grid {
@@ -1303,24 +1326,42 @@
       </div>
 
       <!-- Compétences stage -->
-      <div style="margin-bottom: 1rem; font-family: 'Rajdhani', sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--text);">Compétences & outils maîtrisés en stage</div>
+      <div style="margin-bottom: 6px; font-family: 'Rajdhani', sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--text);">Compétences & outils maîtrisés en stage</div>
+      <div style="margin-bottom: 1rem; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text3); letter-spacing: 0.08em;">// Cliquez sur un outil pour voir ce que j'ai réalisé</div>
       <div class="skills-grid-stage fade-in">
-        <div class="skill-chip"><span>📧</span> Exchange / M365</div>
-        <div class="skill-chip"><span>📞</span> Mitel / MiCollab</div>
-        <div class="skill-chip"><span>🖥️</span> Déploiement FOG</div>
-        <div class="skill-chip"><span>💾</span> Veeam Backup</div>
-        <div class="skill-chip"><span>👥</span> Active Directory & GPO</div>
-        <div class="skill-chip"><span>🛡️</span> SentinelOne / Knox</div>
-        <div class="skill-chip"><span>⚙️</span> PowerShell</div>
-        <div class="skill-chip"><span>☁️</span> Nextcloud</div>
-        <div class="skill-chip"><span>📋</span> Gestion tickets GLPI</div>
-        <div class="skill-chip"><span>🌐</span> DNS / Switch / Visio</div>
-        <div class="skill-chip"><span>📩</span> Vade Cloud (antispam)</div>
-        <div class="skill-chip"><span>📦</span> VMware ESXi / Xen Orchestra</div>
-        <div class="skill-chip"><span>🔥</span> Pare-feu / Bastion / NAT</div>
-        <div class="skill-chip"><span>🔐</span> HTTPS / Certificats TLS</div>
+        <div class="skill-chip skill-chip-clickable" onclick="openSkillModal('exchange')"><span>📧</span> Exchange / M365<span class="chip-arrow">›</span></div>
+        <div class="skill-chip skill-chip-clickable" onclick="openSkillModal('mitel')"><span>📞</span> Mitel / MiCollab<span class="chip-arrow">›</span></div>
+        <div class="skill-chip skill-chip-clickable" onclick="openSkillModal('fog')"><span>🖥️</span> Déploiement FOG<span class="chip-arrow">›</span></div>
+        <div class="skill-chip skill-chip-clickable" onclick="openSkillModal('veeam')"><span>💾</span> Veeam Backup<span class="chip-arrow">›</span></div>
+        <div class="skill-chip skill-chip-clickable" onclick="openSkillModal('ad')"><span>👥</span> Active Directory & GPO<span class="chip-arrow">›</span></div>
+        <div class="skill-chip skill-chip-clickable" onclick="openSkillModal('sentinelone')"><span>🛡️</span> SentinelOne / Knox<span class="chip-arrow">›</span></div>
+        <div class="skill-chip skill-chip-clickable" onclick="openSkillModal('powershell')"><span>⚙️</span> PowerShell<span class="chip-arrow">›</span></div>
+        <div class="skill-chip skill-chip-clickable" onclick="openSkillModal('nextcloud')"><span>☁️</span> Nextcloud<span class="chip-arrow">›</span></div>
+        <div class="skill-chip skill-chip-clickable" onclick="openSkillModal('glpi')"><span>📋</span> Gestion tickets GLPI<span class="chip-arrow">›</span></div>
+        <div class="skill-chip skill-chip-clickable" onclick="openSkillModal('dns')"><span>🌐</span> DNS / Switch / Visio<span class="chip-arrow">›</span></div>
+        <div class="skill-chip skill-chip-clickable" onclick="openSkillModal('vade')"><span>📩</span> Vade Cloud (antispam)<span class="chip-arrow">›</span></div>
+        <div class="skill-chip skill-chip-clickable" onclick="openSkillModal('vmware')"><span>📦</span> VMware ESXi / Xen Orchestra<span class="chip-arrow">›</span></div>
+        <div class="skill-chip skill-chip-clickable" onclick="openSkillModal('firewall')"><span>🔥</span> Pare-feu / Bastion / NAT<span class="chip-arrow">›</span></div>
+        <div class="skill-chip skill-chip-clickable" onclick="openSkillModal('tls')"><span>🔐</span> HTTPS / Certificats TLS<span class="chip-arrow">›</span></div>
       </div>
     </div>
+
+  <!-- ── SKILL MODAL ── -->
+  <div id="skill-modal-overlay" onclick="closeSkillModal()" style="display:none; position:fixed; inset:0; background:rgba(5,10,15,0.85); z-index:2000; backdrop-filter:blur(6px);"></div>
+  <div id="skill-modal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); z-index:2001; width:min(560px,92vw); max-height:85vh; overflow-y:auto;">
+    <div style="background:var(--bg3); border:1px solid var(--border2); border-radius:var(--radius-lg); overflow:hidden;">
+      <div id="skill-modal-header" style="background:var(--surface2); padding:16px 20px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border);">
+        <div>
+          <div id="skill-modal-tag" style="font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--cyan); letter-spacing:0.12em; text-transform:uppercase; margin-bottom:4px;"></div>
+          <div id="skill-modal-title" style="font-family:'Rajdhani',sans-serif; font-size:1.3rem; font-weight:700; color:var(--text);"></div>
+        </div>
+        <button onclick="closeSkillModal()" style="background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:6px; color:var(--text2); font-size:16px; width:32px; height:32px; cursor:pointer; display:flex; align-items:center; justify-content:center;">✕</button>
+      </div>
+      <div style="padding:20px;">
+        <div id="skill-modal-body"></div>
+      </div>
+    </div>
+  </div>
 
   </div>
 </section>
@@ -1404,116 +1445,6 @@
           <span class="proj-tech">PXE</span>
           <span class="proj-tech">Windows</span>
           <span class="proj-tech">PowerShell</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ── SKILLS ── -->
-<section id="skills" style="background: rgba(13, 21, 32, 0.4);">
-  <div class="container">
-    <div class="fade-in">
-      <div class="section-label">Compétences</div>
-      <h2 class="section-title">Stack <span class="accent">Technique</span></h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="skills-categories">
-
-      <div class="skill-cat fade-in">
-        <div class="skill-cat-title"><span>🐧</span> Linux / Systèmes</div>
-        <div class="skill-bar-wrap">
-          <div class="skill-bar-top"><span>Debian / Ubuntu</span><span class="skill-bar-pct">80%</span></div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:80%"></div></div>
-        </div>
-        <div class="skill-bar-wrap">
-          <div class="skill-bar-top"><span>Administration services</span><span class="skill-bar-pct">75%</span></div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:75%"></div></div>
-        </div>
-        <div class="skill-bar-wrap">
-          <div class="skill-bar-top"><span>Bash scripting</span><span class="skill-bar-pct">65%</span></div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:65%"></div></div>
-        </div>
-      </div>
-
-      <div class="skill-cat fade-in">
-        <div class="skill-cat-title"><span>🪟</span> Windows Server</div>
-        <div class="skill-bar-wrap">
-          <div class="skill-bar-top"><span>Active Directory</span><span class="skill-bar-pct">85%</span></div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:85%"></div></div>
-        </div>
-        <div class="skill-bar-wrap">
-          <div class="skill-bar-top"><span>GPO</span><span class="skill-bar-pct">80%</span></div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:80%"></div></div>
-        </div>
-        <div class="skill-bar-wrap">
-          <div class="skill-bar-top"><span>PowerShell</span><span class="skill-bar-pct">75%</span></div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:75%"></div></div>
-        </div>
-      </div>
-
-      <div class="skill-cat fade-in">
-        <div class="skill-cat-title"><span>🌐</span> Réseaux</div>
-        <div class="skill-bar-wrap">
-          <div class="skill-bar-top"><span>TCP/IP, DNS, DHCP</span><span class="skill-bar-pct">80%</span></div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:80%"></div></div>
-        </div>
-        <div class="skill-bar-wrap">
-          <div class="skill-bar-top"><span>VLANs & routage</span><span class="skill-bar-pct">75%</span></div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:75%"></div></div>
-        </div>
-        <div class="skill-bar-wrap">
-          <div class="skill-bar-top"><span>Firewall / NAT</span><span class="skill-bar-pct">70%</span></div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:70%"></div></div>
-        </div>
-      </div>
-
-      <div class="skill-cat fade-in">
-        <div class="skill-cat-title"><span>🔐</span> Cybersécurité</div>
-        <div class="skill-bar-wrap">
-          <div class="skill-bar-top"><span>Hardening système</span><span class="skill-bar-pct">70%</span></div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:70%"></div></div>
-        </div>
-        <div class="skill-bar-wrap">
-          <div class="skill-bar-top"><span>SentinelOne / EDR</span><span class="skill-bar-pct">60%</span></div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:60%"></div></div>
-        </div>
-        <div class="skill-bar-wrap">
-          <div class="skill-bar-top"><span>TLS / Certificats</span><span class="skill-bar-pct">65%</span></div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:65%"></div></div>
-        </div>
-      </div>
-
-      <div class="skill-cat fade-in">
-        <div class="skill-cat-title"><span>📦</span> Virtualisation</div>
-        <div class="skill-bar-wrap">
-          <div class="skill-bar-top"><span>VMware ESXi</span><span class="skill-bar-pct">75%</span></div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:75%"></div></div>
-        </div>
-        <div class="skill-bar-wrap">
-          <div class="skill-bar-top"><span>Proxmox VE</span><span class="skill-bar-pct">80%</span></div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:80%"></div></div>
-        </div>
-        <div class="skill-bar-wrap">
-          <div class="skill-bar-top"><span>Xen Orchestra</span><span class="skill-bar-pct">55%</span></div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:55%"></div></div>
-        </div>
-      </div>
-
-      <div class="skill-cat fade-in">
-        <div class="skill-cat-title"><span>🛠️</span> Outils & Divers</div>
-        <div class="skill-bar-wrap">
-          <div class="skill-bar-top"><span>GLPI</span><span class="skill-bar-pct">85%</span></div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:85%"></div></div>
-        </div>
-        <div class="skill-bar-wrap">
-          <div class="skill-bar-top"><span>Veeam Backup</span><span class="skill-bar-pct">65%</span></div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:65%"></div></div>
-        </div>
-        <div class="skill-bar-wrap">
-          <div class="skill-bar-top"><span>Exchange / M365</span><span class="skill-bar-pct">70%</span></div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:70%"></div></div>
         </div>
       </div>
 
@@ -1864,11 +1795,11 @@
           </a>
           <a href="https://www.linkedin.com/in/elyott-hude-252041285/" target="_blank" class="contact-link">
             <div class="contact-link-icon">💼</div>
-            Linkedin
+            linkedin.com/elyotthude
           </a>
           <a href="tel:+33786244567" class="contact-link">
             <div class="contact-link-icon">📞</div>
-            +33 7 86 24 45 67
+            tel: +33 7 86 24 45 67
           </a>
         </div>
       </div>
@@ -2023,8 +1954,8 @@ const cmds = {
   contact: () => [
     '<span style="color:var(--cyan)">// Contact :</span>',
     '  email    → elyotthude22@gmail.com',
-    '  github   → github.com/elyotthude',
-    '  linkedin → linkedin.com/in/elyotthude',
+    '  github   → github.com/MadeInEly',
+    '  linkedin → https://www.linkedin.com/in/elyott-hude-252041285/',
   ],
   stage: () => [
     '<span style="color:var(--cyan)">// Stage – CDG22 :</span>',
@@ -2085,6 +2016,208 @@ const barObserver = new IntersectionObserver(entries => {
 }, { threshold: 0.3 });
 
 document.querySelectorAll('.skill-cat').forEach(cat => barObserver.observe(cat));
+
+// ── SKILL MODAL ──
+const skillData = {
+  exchange: {
+    icon: '📧',
+    tag: 'Messagerie',
+    title: 'Exchange / Microsoft 365',
+    tasks: [
+      'Résolution d\'un problème bloquant : Exchange ne recevait plus de mails entrants — corrigé grâce à une commande Exchange spécifique côté serveur.',
+      'Utilisation de commandes PowerShell pour modifier les paramètres des boîtes mail Exchange (SMTP, configuration de boîtes génériques).',
+      'Création de messages automatiques sur des boîtes mail génériques (réponse automatique de service).',
+      'Modification des paramètres Exchange pour l\'intégration d\'onglets dans Outlook (add-in LetsIgnit).',
+      'Synchronisation d\'utilisateurs AD avec Microsoft 365 : activation sync365, attribution de licences, alignement de l\'ExchangeGuid, lancement de synchro delta sur SRVSYNCRO et vérification dans l\'ECP.',
+      'Changement de la configuration SMTP Exchange.',
+    ]
+  },
+  mitel: {
+    icon: '📞',
+    tag: 'Téléphonie IP',
+    title: 'Mitel / MiCollab',
+    tasks: [
+      'Configuration et installation d\'une adresse IP sur des téléphones fixes et information du personnel sur leur utilisation.',
+      'Création de comptes utilisateurs sur le serveur Mitel avec attribution d\'un numéro de téléphone interne.',
+      'Paramétrage de postes téléphoniques pour de nouveaux arrivants ou lors de changements de poste.',
+      'Administration du serveur MiCollab pour la gestion centralisée des utilisateurs de téléphonie.',
+      'Découverte du serveur KMS et de son fonctionnement dans l\'environnement de l\'entreprise.',
+    ]
+  },
+  fog: {
+    icon: '🖥️',
+    tag: 'Déploiement de postes',
+    title: 'FOG Project',
+    tasks: [
+      'Déploiement en masse de nouveaux PC Dell via FOG : création, gestion et déploiement d\'images disque système sur plusieurs postes simultanément.',
+      'Diagnostic et résolution d\'un problème d\'image FOG défectueuse laissée par un ancien stagiaire (mauvaise configuration).',
+      'Résolution d\'un bug FOG lié à un problème de place disque sur le serveur (serveur qui n\'affichait plus rien faute d\'espace).',
+      'Correction d\'un problème de déploiement sur nouveaux PC par déplacement des fichiers de mise à jour du kernel vers le serveur FOG (nécessaire pour les nouveaux modèles).',
+      'Création de nouvelles images FOG pour les postes Windows, puis déploiement sur le parc.',
+      'Utilisation de FOG couplé à l\'AD pour créer les comptes utilisateurs après déploiement.',
+      'Forçage de la création d\'utilisateurs sur le serveur FOG suite à un problème de registration.',
+    ]
+  },
+  veeam: {
+    icon: '💾',
+    tag: 'Sauvegarde & PRA',
+    title: 'Veeam Backup & Replication',
+    tasks: [
+      'Configuration et test d\'une nouvelle tâche de sauvegarde Veeam pour vérifier son bon fonctionnement.',
+      'Utilisation du système de restauration Veeam pour récupérer des fichiers à partir de sauvegardes existantes.',
+      'Sauvegarde sur cassettes physiques avec Veeam (plan de reprise d\'activité — PRA).',
+      'Ajout d\'un nouveau serveur dans une tâche de sauvegarde Veeam existante.',
+      'Intégration du nouveau serveur GLPI migré dans le plan de sauvegarde Veeam (PRA via Ekialis).',
+    ]
+  },
+  ad: {
+    icon: '👥',
+    tag: 'Administration système',
+    title: 'Active Directory & GPO',
+    tasks: [
+      'Préparation de postes utilisateurs : création/liaison de comptes AD, affectation dans les bonnes OU, intégration au domaine.',
+      'Création de GPO pour automatiser le lancement de scripts de démarrage (récupération d\'inventaire par GLPI sur tous les postes du domaine).',
+      'Création d\'une GPO spécifique pour activer le pavé numérique uniquement sur les PC Windows 11.',
+      'Suppression de comptes utilisateurs AD en fin de contrat ou suite à demande.',
+      'Résolution d\'un problème d\'utilisateur placé dans une mauvaise OU.',
+      'Création d\'un compte utilisateur AD par copie d\'un compte existant, avec activation de la sync Microsoft 365 et attribution de la licence.',
+      'Utilisation de la méthode AGDLP pour structurer les droits d\'accès aux ressources partagées.',
+      'Création d\'une délégation DNS depuis un ticket en assistance à distance.',
+    ]
+  },
+  sentinelone: {
+    icon: '🛡️',
+    tag: 'Cybersécurité',
+    title: 'SentinelOne / Knox',
+    tasks: [
+      'Résolution d\'un problème SentinelOne qui bloquait l\'exécution d\'une application métier, même après autorisation côté serveur.',
+      'Début de mise en place de Knox (MDM Samsung) pour la gestion des téléphones professionnels : séparation partie pro/privée.',
+      'Déploiement de Knox sur des téléphones professionnels et paramétrage des comptes utilisateurs associés.',
+      'Participation à une conférence interne sur les bonnes pratiques en cas de cyberattaque (exercice de simulation).',
+      'Découverte de l\'EDR SentinelOne géré en service managé avec Orange Cyberdéfense.',
+    ]
+  },
+  powershell: {
+    icon: '⚙️',
+    tag: 'Scripting',
+    title: 'PowerShell',
+    tasks: [
+      'Développement d\'un script PowerShell complet : création automatisée d\'un chemin de dossier réseau, création de 3 groupes de domaine avec droits différenciés, application des permissions NTFS, alerte si le dossier existe déjà, vérification que les groupes sont dans la bonne OU.',
+      'Utilisation de commandes PowerShell pour modifier les paramètres de boîtes mail Exchange (configuration, SMTP).',
+      'Création de GPO avec scripts PowerShell de démarrage pour l\'inventaire automatique GLPI.',
+      'Résolution d\'un problème Outlook récalcitrant (option de découverte automatique cochée dans les paramètres réseau du panneau de configuration).',
+      'Automatisation de tâches d\'administration Active Directory via PowerShell.',
+    ]
+  },
+  nextcloud: {
+    icon: '☁️',
+    tag: 'Partage de fichiers',
+    title: 'Nextcloud',
+    tasks: [
+      'Installation et mise en place de Nextcloud sur un serveur dédié comme solution de partage de fichiers interne.',
+      'Ouverture des ports nécessaires dans le pare-feu pour rendre Nextcloud accessible.',
+      'Mise en place de certificats TLS pour passer le service de HTTP à HTTPS et sécuriser les accès.',
+    ]
+  },
+  glpi: {
+    icon: '📋',
+    tag: 'ITSM / Helpdesk',
+    title: 'GLPI – Gestion des tickets & migration',
+    tasks: [
+      'Réponse et traitement de tickets d\'assistance au quotidien (incidents matériels, logiciels, réseau).',
+      'Configuration d\'une GPO pour que l\'agent GLPI remonte automatiquement l\'inventaire de tous les postes du domaine.',
+      'Optimisation de GLPI : mise en place de notifications par e-mail Outlook lorsqu\'un agent se connecte.',
+      'Migration majeure : upgrade de GLPI 10.0.6 vers GLPI 11 sur un serveur Debian (passage de Debian 11 à Debian 13), résolution de problèmes de dépendances PHP/BDD.',
+      'Tests post-migration en environnement de préprod : vérification des logs, des services, des accès et correction de bugs (gabarits, erreurs de log, création de mail admin).',
+      'Intégration du nouveau serveur GLPI dans le PRA (Ekialis), dans le pare-feu SonicWall, dans le bastion, ajout de règles DNS et rédaction de la documentation serveur.',
+      'Modification de l\'agent GLPI et mise à jour des certificats de l\'agent.',
+      'Création d\'un DAT (Document d\'Architecture Technique) relatif au serveur GLPI.',
+    ]
+  },
+  dns: {
+    icon: '🌐',
+    tag: 'Réseau',
+    title: 'DNS / Switch / Visio',
+    tasks: [
+      'Récupération et analyse des logs des switches en SSH pour diagnostiquer des problèmes réseau.',
+      'Création de noms DNS pour les nouveaux serveurs déployés (GLPI, serveurs internes).',
+      'Création d\'une délégation DNS en assistance à distance suite à un ticket utilisateur.',
+      'Résolution d\'un problème réseau : un poste ne parvenait pas à se connecter en Ethernet — diagnostic et correction.',
+      'Lecture de schémas d\'infrastructure réseau via Visio pour comprendre l\'architecture en place lors de la prise en main du stage.',
+    ]
+  },
+  vade: {
+    icon: '📩',
+    tag: 'Sécurité messagerie',
+    title: 'Vade Cloud (antispam)',
+    tasks: [
+      'Blocage de mails indésirables en les ajoutant à la liste noire Vade Cloud (gestion du spam entrant).',
+      'Prise en main de la solution Vade Cloud utilisée pour filtrer les emails malveillants avant qu\'ils n\'atteignent les boîtes Exchange.',
+      'Découverte de la chaîne de traitement anti-spam/anti-phishing mise en place par le CDG22 avec Vade comme couche de protection.',
+    ]
+  },
+  vmware: {
+    icon: '📦',
+    tag: 'Virtualisation',
+    title: 'VMware ESXi / Xen Orchestra',
+    tasks: [
+      'Utilisation de l\'infrastructure VMware ESXi existante pour créer de nouvelles machines virtuelles (VM SRV TRANSFERT, VM Debian pour GLPI).',
+      'Modification de snapshots de VMs sur ESXi (sauvegarde d\'état avant intervention).',
+      'Ajout de stockage sur un serveur virtuel à l\'aide du gestionnaire de disques.',
+      'Découverte de Xen Orchestra comme interface alternative de gestion de l\'hyperviseur.',
+      'Ajout de nouvelles VMs dans le bastion pour sécuriser leur accès.',
+      'Installation d\'un nouvel ISO dans la bibliothèque de médias de l\'hyperviseur.',
+    ]
+  },
+  firewall: {
+    icon: '🔥',
+    tag: 'Sécurité réseau',
+    title: 'Pare-feu / Bastion / NAT',
+    tasks: [
+      'Ouverture de ports spécifiques dans le pare-feu (ports 8080 et 5432 pour le serveur GLPI, accès SFTP depuis le bastion).',
+      'Ajout de règles de pare-feu Stormshield pour autoriser certains flux uniquement depuis des VLANs définis.',
+      'Ajout de deux serveurs dans le pare-feu avec création des noms DNS associés.',
+      'Utilisation du bastion Wallix (Walix) pour accéder aux serveurs de manière sécurisée (SSH) et ajout de nouvelles VMs dans le bastion.',
+      'Intégration du serveur GLPI migré dans le pare-feu SonicWall dans le cadre du PRA.',
+      'Découverte de l\'architecture pare-feu / DMZ / VLAN du CDG22 lors de la prise en main.',
+    ]
+  },
+  tls: {
+    icon: '🔐',
+    tag: 'Sécurité web',
+    title: 'HTTPS / Certificats TLS',
+    tasks: [
+      'Mise en place de certificats TLS sur le serveur Nextcloud pour passer le service de HTTP à HTTPS.',
+      'Création et ajout de certificats TLS dans le DNS du serveur GLPI pour sécuriser les accès web.',
+      'Modification du certificat de l\'agent GLPI pour mettre à jour sa communication avec le serveur.',
+      'Configuration d\'une VM Debian 13 (GLPI) avec HTTPS dès sa mise en production.',
+    ]
+  }
+};
+
+function openSkillModal(key) {
+  const d = skillData[key];
+  if (!d) return;
+  document.getElementById('skill-modal-tag').textContent = '// ' + d.tag;
+  document.getElementById('skill-modal-title').textContent = d.icon + ' ' + d.title;
+  const body = document.getElementById('skill-modal-body');
+  body.innerHTML = d.tasks.map(t => `
+    <div class="modal-task">
+      <span class="modal-task-bullet">›</span>
+      <span>${t}</span>
+    </div>`).join('');
+  document.getElementById('skill-modal-overlay').style.display = 'block';
+  document.getElementById('skill-modal').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeSkillModal() {
+  document.getElementById('skill-modal-overlay').style.display = 'none';
+  document.getElementById('skill-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSkillModal(); });
 </script>
 </body>
 </html>
