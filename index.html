@@ -1172,17 +1172,17 @@
     </div>
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;">
       <div class="timeline fade-in">
+         <div class="tl-item">
+          <div class="tl-date">2023</div>
+          <div class="tl-title">Baccalauréat STI2D</div>
+          <div class="tl-sub">Filière technologique</div>
+          <div class="tl-desc">Obtention du baccalauréat, premiers intérêts pour l'informatique et les réseaux.</div>
+        </div>
         <div class="tl-item">
           <div class="tl-date">2023 – 2025</div>
           <div class="tl-title">BTS SIO – Option SISR</div>
           <div class="tl-sub">Lycée Rabelais · Saint-Brieuc</div>
           <div class="tl-desc">Formation en Solutions d'Infrastructure, Systèmes et Réseaux. Modules : réseaux IP, virtualisation, administration, cybersécurité, scripting.</div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-date">2023</div>
-          <div class="tl-title">Baccalauréat</div>
-          <div class="tl-sub">Filière technologique / générale</div>
-          <div class="tl-desc">Obtention du baccalauréat, premiers intérêts pour l'informatique et les réseaux.</div>
         </div>
         <div class="tl-item">
           <div class="tl-date">Objectif 2025+</div>
@@ -1425,14 +1425,14 @@
       </div>
 
       <div class="proj-card fade-in">
-        <div class="proj-num">05 / Sécurité</div>
-        <div class="proj-title">Hardening Système Linux</div>
-        <p class="proj-desc">Application d'un guide de hardening sur un serveur Debian : désactivation de services inutiles, configuration iptables, mise en place de fail2ban, audit SSH et configuration de journaux sécurité.</p>
+        <div class="proj-num">05 / Développement Web</div>
+        <div class="proj-title">Bibliodrive - Réservation de livres</div>
+        <p class="proj-desc">Développement d’un site web de type bibliodrive permettant de consulter un catalogue de livres, rechercher des ouvrages et effectuer des réservations en ligne. Création d’une base de données SQL pour la gestion des utilisateurs, des livres et des réservations.</p>
         <div class="proj-techs">
-          <span class="proj-tech">Debian</span>
-          <span class="proj-tech">iptables</span>
-          <span class="proj-tech">fail2ban</span>
-          <span class="proj-tech">SSH</span>
+          <span class="proj-tech">PHP</span>
+          <span class="proj-tech">CSS</span>
+          <span class="proj-tech">SQL</span>
+          <span class="proj-tech">HTML</span>
         </div>
       </div>
 
@@ -1938,7 +1938,7 @@ const cmds = {
     '  [OS]      Linux Debian · Windows Server 2019',
     '  [NET]     VLANs · Routage · DNS · DHCP · pfSense',
     '  [VIRT]    Proxmox VE · VMware ESXi · Xen',
-    '  [SEC]     Pare-feu · TLS · SentinelOne · Hardening',
+    '  [WEB]     PHP · CSS · SQL · HTML',
     '  [SCRIPT]  PowerShell · Bash',
     '  [TOOLS]   GLPI · Veeam · FOG · Exchange · Nextcloud',
   ],
@@ -1948,7 +1948,7 @@ const cmds = {
     '  02  Scripts PowerShell AD automatisation',
     '  03  Architecture Réseau VLAN / pfSense',
     '  04  Migration GLPI 10→11 / Debian 11→13 (CDG22)',
-    '  05  Hardening Système Linux',
+    '  05  Bibliodrive - Réservation de livres',
     '  06  Déploiement masse FOG',
   ],
   contact: () => [
